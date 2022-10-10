@@ -2,10 +2,20 @@
 import './App.css';
 import Table from './Table';
 // import testData from './Data/Data'
-
+import React, { useEffect, useState } from 'react';
 
 function App() {
-  var data=[
+  const [values,setValues]=useState(0);
+  useEffect(()=>{
+    fetch(
+    "https://jsonplaceholder.typicode.com/users")
+                .then((res) => res.json())
+                .then((json) => {
+                    setValues(json)
+                })
+    })
+
+    var data=[
     {
         'key':0,
         'name':"Jatin Agrawal",
