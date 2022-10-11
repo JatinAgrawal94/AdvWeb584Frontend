@@ -5,75 +5,78 @@ import Table from './Table';
 import React, { useEffect, useState } from 'react';
 
 function App() {
-  const [values,setValues]=useState(0);
+  const [values,setValues]=useState([]);
   useEffect(()=>{
     fetch(
-    "https://jsonplaceholder.typicode.com/users")
+    "https://localhost:7005/",{mode:"cors"})
                 .then((res) => res.json())
                 .then((json) => {
                     setValues(json)
                 })
-    })
+                .catch((error)=>{
+                  console.log(error);
+                })
+    },[values])
 
-    var data=[
-    {
-        'key':0,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-    {'key':1,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-    {'key':2,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-    {'key':3,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-    {'key':4,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-    {'key':5,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-    {'key':6,
-        'name':"Jatin Agrawal",
-        'email':'jatinagrawal0801@gmail.com',
-        'dob':'10/08/2000',
-        'gender':'Male',
-        'bloodgroup':'A+',
-        'contact':'9898989898'
-    },
-]
+//     var data=[
+//     {
+//         'key':0,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+//     {'key':1,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+//     {'key':2,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+//     {'key':3,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+//     {'key':4,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+//     {'key':5,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+//     {'key':6,
+//         'name':"Jatin Agrawal",
+//         'email':'jatinagrawal0801@gmail.com',
+//         'dob':'10/08/2000',
+//         'gender':'Male',
+//         'bloodgroup':'A+',
+//         'contact':'9898989898'
+//     },
+// ]
   return (
     <div className="App">
         <nav>
@@ -88,8 +91,9 @@ function App() {
           <p>Contact</p>
         </div>
         <div>
+
         {  
-        data.map((element,i)=>{
+        values.map((element,i)=>{
         return <Table prop={element} key={i+1}/>
         })
       }
