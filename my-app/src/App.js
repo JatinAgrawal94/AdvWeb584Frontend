@@ -1,105 +1,24 @@
-// import logo from './logo.svg';
 import './App.css';
-import Table from './Table';
-// import testData from './Data/Data'
-import React, { useEffect, useState } from 'react';
-
+import {BrowserRouter as Router,Routes, Route} from 'react-router-dom';
+import {Nav} from "./components/nav";
+import {Home} from './components/home';
+import {Appointment} from './components/appointment';
+import {Patient} from './components/patient';
+// import dotenv from 'dotenv';
+// dotenv.config();
 function App() {
-  const [values,setValues]=useState([]);
-  useEffect(()=>{
-    fetch(
-    "https://localhost:7005/",{mode:"cors"})
-                .then((res) => res.json())
-                .then((json) => {
-                    setValues(json)
-                })
-                .catch((error)=>{
-                  console.log(error);
-                })
-    },[values])
 
-//     var data=[
-//     {
-//         'key':0,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-//     {'key':1,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-//     {'key':2,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-//     {'key':3,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-//     {'key':4,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-//     {'key':5,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-//     {'key':6,
-//         'name':"Jatin Agrawal",
-//         'email':'jatinagrawal0801@gmail.com',
-//         'dob':'10/08/2000',
-//         'gender':'Male',
-//         'bloodgroup':'A+',
-//         'contact':'9898989898'
-//     },
-// ]
   return (
+    <Router>
     <div className="App">
-        <nav>
-          Medical Records Management
-        </nav>
-        <div className="table-heading">
-          <p>Name</p>
-          <p>Email</p>
-          <p>DateOfBirth</p>
-          <p>Gender</p>
-          <p>Blood Group</p>
-          <p>Contact</p>
-        </div>
-        <div>
-
-        {  
-        values.map((element,i)=>{
-        return <Table prop={element} key={i+1}/>
-        })
-      }
-        </div>
+        <Nav/>
+        <Routes>
+          <Route exact path='/' element={<Home/>}/>
+          <Route exact path='/appointment' element={<Appointment/>}/>
+          <Route exact path='/patient' element={<Patient/>}/>
+        </Routes>
     </div>
-
+</Router>
   );
 }
 
