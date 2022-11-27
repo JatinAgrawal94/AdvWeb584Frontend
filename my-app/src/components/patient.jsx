@@ -1,22 +1,12 @@
-import { useEffect } from "react";
-import {useSelector, useDispatch} from 'react-redux';
-import {getPatients} from '../actions/patientActions'
+import { Link } from "react-router-dom";
 
-export function Patient(){
-    const dispatch=useDispatch();
-    const patient=useSelector(state=>state.patient);
-    const {patients,loading}=patient;
-    useEffect(()=>{
-        dispatch(getPatients());
-    },[dispatch]);
+export default function PatientComponent(props){
+    const {data}=props;
     return (
-        <div>
-            patient
-            {loading===false?
-            patients.map((e)=>{
-                return (<div key={e.patientId}>{e.bloodgroup}</div>)
-            }): <div>Loading</div>
-            }
+        <div className="width-11/12 p-4">
+           <div className="width-11/12 bg-gray-300 h-14 text-3xl font-semibold px-8">
+                <Link className="width-full" to={'/patient/1'}>{data.patientName}</Link>
+            </div>
         </div>
     )
 }
