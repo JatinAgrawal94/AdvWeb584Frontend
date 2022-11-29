@@ -5,6 +5,7 @@ import {Home} from './components/home';
 import AppointmentScreen from './screens/appointmentScreen';
 import PatientScreen from './screens/patientScreen'
 import PatientProfile from './screens/patientProfile'
+import DoctorScreen from './screens/doctorScreen'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/appointment' element={<AppointmentScreen/>}/>
           <Route exact path='/patient' element={<PatientScreen/>}/>
           <Route exact path='/patient/:id' element={<PatientProfile/>}/>
+          <Route exact path='/doctor' element={<DoctorScreen/>}/>
         </Routes>
     </div>
 </Router>

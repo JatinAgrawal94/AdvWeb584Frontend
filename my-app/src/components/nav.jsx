@@ -8,9 +8,8 @@ export function Nav(){
             <Link to='/' className="px-8">Home</Link>    
             <Link to='/appointment' className="px-8">Appointments</Link>
             <Link to='/patient' className="px-8">Patient</Link>
+            <Link to='/doctor' className="px-8">Doctor</Link>
             </div>
         </nav>
     );
 }
-
-// export default Nav;

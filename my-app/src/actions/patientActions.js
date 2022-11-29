@@ -6,6 +6,7 @@ export const getPatients=()=>async(dispatch,getState)=>{
     try{
         var {data}=await Axios.get(`https://localhost:7204/api/Patient`);
         dispatch({type: PATIENT_LIST_SUCCESS,payload:data});
+        localStorage.setItem('patients',JSON.stringify(getState().patientList.patients));
     }catch(error){
         dispatch({type: PATIENT_LIST_FAIL,payload:error.message});
     }
@@ -16,6 +17,7 @@ export const getSpecificPatient=(id)=>async(dispatch,getState)=>{
     try{
         var {data}=await Axios.get(`https://localhost:7204/api/Patient/id?id=${id}`);
         dispatch({type: PATIENT_SUCCESS,payload:data});
+        localStorage.setItem('patient',JSON.stringify(getState().patient.patient));
     }catch(error){
         dispatch({type: PATIENT_FAIL,payload:error.message});
     }
