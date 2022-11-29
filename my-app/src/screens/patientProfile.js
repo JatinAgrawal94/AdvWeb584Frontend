@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {getSpecificPatient} from '../actions/patientActions'
 import PatientForm from "../components/patientForm";
@@ -9,13 +9,6 @@ export default function PatientProfile(props){
     const {patient,loading}=p;
     const id=window.location.pathname.split('/').slice(-1)[0];
     var edit=true;
-    
-    const [email,setEmail]=useState();
-    const [dob,setDOB]=useState();
-    const [gender,setGender]=useState();
-    const [contact,setContact]=useState();
-    const [bg,setBG]=useState();
-    const [add,setAdd]=useState();
 
     useEffect(()=>{
             dispatch(getSpecificPatient(id));     
@@ -37,7 +30,7 @@ export default function PatientProfile(props){
                     <p>Contact: {patient.contact}</p>
                     <p>Bloodgroup: {patient.bloodgroup}</p>
                     <p>Address: {patient.address}</p>
-                </div>: <PatientForm data={patient}/>
+                </div>: <PatientForm data={patient} edit={true}/>
                 }
             </div>
         </div>

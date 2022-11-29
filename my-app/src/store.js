@@ -1,18 +1,18 @@
-// import {combineReducers} from 'redux';
-import { patientListReducer,patientReducer } from './reducers/patientReducer';
-// import thunk from 'redux-thunk';
+import { patientCreateReducer, patientDataUpdateReducer, patientDeleteReducer, patientListReducer,patientReducer} from './reducers/patientReducer';
 import {configureStore} from '@reduxjs/toolkit/';
 
 const initialState={
     patientList:localStorage.getItem('patients') ? JSON.parse(localStorage.getItem('patients')):[],
-    patient:localStorage.getItem('patient') ? JSON.parse(localStorage.getItem('patient')):{}
+    patient:localStorage.getItem('patient') ? JSON.parse(localStorage.getItem('patient')):{},
 }
 
-// const reducer=combineReducers({
-//     patient:patientReducer
-// })
-
-// const composeEnhancer=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-
-export default configureStore({reducer:{patientList:patientListReducer,patient:patientReducer},preloadedState:initialState});
+export default configureStore({
+    reducer:{
+        patientList:patientListReducer,
+        patient:patientReducer,
+        patientDataUpdate:patientDataUpdateReducer,
+        createPatient:patientCreateReducer,
+        deletePatient:patientDeleteReducer
+    },
+    preloadedState:initialState
+});

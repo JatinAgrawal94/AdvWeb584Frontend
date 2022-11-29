@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {getPatients} from '../actions/patientActions'
 import PatientComponent from '../components/patient';
+import { Link } from "react-router-dom";
 
 export default function PatientScreen(){
     const dispatch=useDispatch();
@@ -15,6 +16,7 @@ export default function PatientScreen(){
     return (
         <div>
             List of Patients
+            <Link to='/patient/create' className="px-8">Add Patient</Link>    
             {loading===false?
             patients.map((e)=>{
                 return <PatientComponent  key={e.patientId} data={e}/>

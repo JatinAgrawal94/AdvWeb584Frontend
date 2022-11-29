@@ -6,6 +6,7 @@ export default function PatientComponent(props){
         <div className="width-11/12 p-4">
            <div className="width-11/12 bg-gray-300 h-14 text-3xl font-semibold px-8">
                 <Link className="width-full" to={`/patient/${data.patientId}`}>{data.patientName}</Link>
+                 {/* <button onClick={()=>{}}>Delete</button> */}
             </div>
         </div>
     )
