@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {getPatients} from '../actions/patientActions'
-import PatientComponent from '../components/patient';
+import PatientComponent from '../components/patientComponent';
 import { Link } from "react-router-dom";
 
 export default function PatientScreen(){
