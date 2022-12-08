@@ -2,7 +2,7 @@ import { useEffect} from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {getSpecificPatient} from '../actions/patientActions'
 import PatientForm from "../components/patientForm";
-
+import React  from 'react';
 export default function PatientProfile(props){
     const dispatch=useDispatch();
     const p=useSelector(state=>state.patient);

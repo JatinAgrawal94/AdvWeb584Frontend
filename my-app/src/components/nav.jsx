@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import React from 'react';
 export function Nav(){
     return (
         <nav className="w-full text-3xl flex justify-between">

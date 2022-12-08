@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import {BrowserRouter as Router,Routes, Route} from 'react-router-dom';
 import {Nav} from "./components/nav";
 import {Home} from './components/home';
@@ -9,9 +10,10 @@ import DoctorScreen from './screens/doctorScreen'
 import PatientForm from './components/patientForm';
 import DoctorProfile from './screens/doctorProfile';
 import DoctorForm from './components/doctorForm';
+import dotenv from 'dotenv';
 
 function App() {
-
+  dotenv.config();
   return (
     <Router>
     <div className="App width-full">

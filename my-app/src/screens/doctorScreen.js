@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getDoctors} from '../actions/doctorActions'
 import DoctorComponent from '../components/doctorComponent';
 import { Link } from "react-router-dom";
-
+import React from 'react';
 
 export default function DoctorScreen(){
     const dispatch=useDispatch();

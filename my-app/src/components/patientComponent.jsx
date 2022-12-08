@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import { deletePatientProfile } from "../actions/patientActions";
 import { useState} from "react";
-
+import React from 'react';
 export default function PatientComponent(props){
     const {data}=props;
     const dispatch=useDispatch();

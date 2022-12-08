@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getPatients} from '../actions/patientActions'
 import PatientComponent from '../components/patientComponent';
 import { Link } from "react-router-dom";
-
+import React from 'react';
 export default function PatientScreen(){
     const dispatch=useDispatch();
     const patient=useSelector(state=>state.patientList);
