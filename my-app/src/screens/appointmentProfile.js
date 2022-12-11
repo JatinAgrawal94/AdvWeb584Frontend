@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { getAppointments } from '../actions/appointmentActions';
+import { deleteAppointments, getAppointments } from '../actions/appointmentActions';
 import { useEffect } from "react";
 
 
@@ -21,6 +21,7 @@ export default function AppointmentProfile(){
     },[dispatch])
 
     const deleteAppointment=()=>{
+        dispatch(deleteAppointments(data.appointmentId));
     }
 
     return (
