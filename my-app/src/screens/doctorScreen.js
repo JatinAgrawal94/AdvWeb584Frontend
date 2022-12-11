@@ -15,12 +15,14 @@ export default function DoctorScreen(){
     },[dispatch]);
     return (
         <div>
-            List of Doctors
-            <Link to='/doctor/create' className="px-8">Add Doctors</Link>    
+            <p className="fw-bold">List of Doctors</p>
+            <Link to='/doctor/create' className="btn btn-primary">Add Doctors</Link>    
             {loading===false?
-            doctors.map((e)=>{
-                return <DoctorComponent  key={e.doctorId} data={e}/>
-            })
+            <div className="list-group">
+               { doctors.map((e)=>{
+                     return <DoctorComponent  key={e.doctorId} data={e}/>
+                })}
+            </div>
             : <div>Loading</div>
             }
         </div>

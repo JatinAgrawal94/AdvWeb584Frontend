@@ -39,7 +39,6 @@ export const createPatientProfile=(patient)=>async(dispatch,getState)=>{
         await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Patient`,patient);
         dispatch({type:PATIENT_CREATE_SUCCESS,payload:"Patient Created"});
     } catch (error) {
-        console.log(error);
         dispatch({type:PATIENT_CREATE_FAIL,payload:error.message});
     }
 }
@@ -47,8 +46,7 @@ export const createPatientProfile=(patient)=>async(dispatch,getState)=>{
 export const deletePatientProfile=(id)=>async(dispatch,getState)=>{
     dispatch({type:PATIENT_DELETE_REQUEST,payload:{}})
     try {
-        const {status}=await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/id?id=${id}`);
-        console.log(status);
+        await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/id?id=${id}`);
         dispatch({type:PATIENT_DELETE_SUCCESS,payload:"Patient Deleted"})
     } catch (error) {
         dispatch({type:PATIENT_DELETE_FAIL,payload:error.message})

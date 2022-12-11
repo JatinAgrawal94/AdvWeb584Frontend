@@ -13,10 +13,10 @@ export default function PatientComponent(props){
     }
 
     return (
-        <div className="width-11/12 p-4">
-           <div className="width-11/12 bg-gray-300 h-14 text-3xl font-semibold px-8 flex justify-between">
-                <Link className="width-full" to={`/patient/${data.patientId}`}>{data.patientName}</Link>
-                 <button onClick={()=>{deletePatient()}}>Delete</button>
+        <div className="list-group-item my-2">
+           <div className="d-flex justify-content-between">
+                <Link className="text-decoration-none text-dark" to={`/patient/${data.patientId}`}>{data.patientName}</Link>
+                 <button onClick={()=>{deletePatient()}} className="btn btn-danger">Delete</button>
             </div>
         </div>
     )

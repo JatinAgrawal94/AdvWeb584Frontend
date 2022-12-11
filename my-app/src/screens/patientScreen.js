@@ -15,12 +15,14 @@ export default function PatientScreen(){
 
     return (
         <div>
-            List of Patients
-            <Link to='/patient/create' className="px-8">Add Patient</Link>    
+           <p className="fw-bold"> List of Patients</p>
+            <Link to='/patient/create' className="btn btn-primary">Add Patient</Link>    
             {loading===false?
-            patients.map((e)=>{
-                return <PatientComponent  key={e.patientId} data={e}/>
-            })
+            <div className="list-group">
+                {patients.map((e)=>{
+                    return <PatientComponent  key={e.patientId} data={e}/>
+                })}
+            </div>
             : <div>Loading</div>
             }
         </div>
