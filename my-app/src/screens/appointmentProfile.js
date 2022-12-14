@@ -3,9 +3,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import { deleteAppointments, getAppointments } from '../actions/appointmentActions';
 import { useEffect } from "react";
 
-
+import {useNavigate} from 'react-router-dom';
 export default function AppointmentProfile(){
     const dispatch=useDispatch();
+    const navigate=useNavigate();
     const app=useSelector(state=>state.getAppointment);
     const {loading,appointments}=app;   
     const id=window.location.pathname.split("/")[2];
@@ -22,6 +23,7 @@ export default function AppointmentProfile(){
 
     const deleteAppointment=()=>{
         dispatch(deleteAppointments(data.appointmentId));
+        navigate(-1);
     }
 
     return (

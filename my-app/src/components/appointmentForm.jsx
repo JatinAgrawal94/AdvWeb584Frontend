@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import React from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { createAppointments,deleteAppointments } from "../actions/appointmentActions";
+import { createAppointments } from "../actions/appointmentActions";
 import { getPatients } from "../actions/patientActions";
 import { getDoctors } from "../actions/doctorActions";
 
@@ -19,40 +19,36 @@ export default function AppointmentForm(props){
         patientId:"",
         doctorId:""
     });   
-    const [patientId,setPID]=useState();
-    const [doctorId,setDID]=useState();
-
-    const p=document.getElementsByClassName("patientclass");
-    
-
-    const addAppointment=()=>{
-        // form.patientId=patientId;
-        // form.doctorId=doctorId;
-        // console.log(form);
-        const data={
-            patientName:"Jatin Agrawal",
-            doctorName:"Parvatesh Parvatikar",
-            timings:"12:00PM",
-            appointmentType:"Follow-Up",
-            date:"12/11/2022",
-            reason:"No Reason",
-            patientId:1,
-            doctorId:1
-        }
-        for(let i=0;i<p.length;i++){
-            console.log(p[i]['id']);
-            // console.log(p.isSelected())
-        }
-        p.namedItem("Jatin Agrawal");
-        // dispatch(createAppointments(data));
-        // dispatch(deleteAppointments(3));
+    const errorSectionCSS={
+        color:"red"
     }
-    // const savePatientId=()=>{
+    const addAppointment=()=>{        
+        const result1=patient.patients.filter((e)=>e.patientName===form.patientName);
+        const result2=doctor.doctors.filter((e)=>e.doctorName===form.doctorName);
+        if(form.appointmentType!=="Follow Up" || form.appointmentType!=="New"){
+            document.getElementsByClassName('error-section')[0].innerHTML="AppointmentType is invalid";
+        }
+        else if(result1.length!==0 && result2.length!==0){
+            form.patientId=result1[0].patientId;
+            form.doctorId=result2[0].doctorId;
+            dispatch(createAppointments(form));
+            let input=document.getElementsByTagName('input');
+            for(let i=0;i<input.length;i++){
+                input[i].value="";
+            }
+        }else{
+            if(result1.length===0 && result2.length===0){
+                document.getElementsByClassName('error-section')[0].innerHTML="Doctor and Patient doesn't exist.";
+            }
+            else if(result1.length===0){
+                document.getElementsByClassName('error-section')[0].innerHTML="Patient doesn't exist";
 
-    // }
-    // const saveDoctorId=()=>{
+            }else if(result2.length===0){
+                document.getElementsByClassName('error-section')[0].innerHTML="Doctor doesn't exist.";
+            }
+        }
+    }
 
-    // }
     useEffect(()=>{
         dispatch(getDoctors());
         dispatch(getPatients());
@@ -61,9 +57,10 @@ export default function AppointmentForm(props){
     return (
         doctor.loading===false && patient.loading===false?
         <div>
+            <form>
             <div>
-                <label className='form-label' htmlFor="exampleDataList">PatientName</label>
-                <input className='form-control' type="select" list="datalistOptions" id="exampleDataList" onChange={(e)=>setForm({...form,patientName:e.target.value})}  required/>
+                <label className='form-label' htmlFor="exampleDataList validationServer01">PatientName</label>
+                <input className='form-control has-validation' type="select" list="datalistOptions" id="exampleDataList" onChange={(e)=>setForm({...form,patientName:e.target.value})}  required/>
                 <datalist id="datalistOptions">
                     {
                         patient.patients.map((e)=>{
@@ -72,26 +69,13 @@ export default function AppointmentForm(props){
                     }
                 </datalist>
             </div>
-            {/* <select className="form-select" aria-label="Default select example" >
-                <option>Open this select menu</option>
-                {
-                     patient.patients.map((e)=>{
-                        return  <option value={e.patientName} key={e.patientId} onClick={(e)=>{console.log("vfvfv")}}/>
-                    })
-                }
-                <option>Open this select menu</option>
-                <option onClick={()=>{console.log(value)}} value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option> 
-            </select> */}
-
             <div>
                 <label className='form-label' htmlFor="exampleDataList1" >DoctorName</label>
                 <input className='form-control' type="text"  list="datalistOptions1" id="exampleDataList1" onChange={(e)=>setForm({...form,doctorName:e.target.value})} required/>
                 <datalist id="datalistOptions1">
                 {
                     doctor.doctors.map((e)=>{
-                        return  <option value={e.doctorName} key={e.doctorId} onClick={()=>{setDID(e.doctorId)}}/>
+                        return  <option value={e.doctorName} key={e.doctorId}/>
                     })
                 }
                 </datalist>
@@ -117,6 +101,8 @@ export default function AppointmentForm(props){
                 <input className='form-control' type="text"  onChange={(e)=>setForm({...form,reason:e.target.value})}required/>
             </div>
             <button type ="submit" className="btn btn-primary" onClick={()=>addAppointment()}>Create Appointment</button>
+            <p className="error-section" style={errorSectionCSS}></p>
+            </form>
         </div>:
         <div>Loading</div>
     );

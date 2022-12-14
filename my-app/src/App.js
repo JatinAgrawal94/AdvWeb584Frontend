@@ -33,7 +33,7 @@ function App() {
           <Route exact path='/patient/create' element={<PatientForm data={{patientId:"",patientName:"",patientEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",address:""}} edit={false}/>}/>
           <Route exact path='/doctor' element={<DoctorScreen/>}/>
           <Route exact path='/doctor/:id' element={<DoctorProfile/>}/>
-          <Route exact path='/doctor/create' element={<DoctorForm data={{doctorId:"",doctorName:"",doctorEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",address:""}} edit={false}/>}/>
+          <Route exact path='/doctor/create' element={<DoctorForm data={{doctorId:"",doctorName:"",doctorEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",designation:"",timings:"-",address:""}} edit={false}/>}/>
           <Route exact path='/login' element={<LoginScreen/>}/>
         </Routes>
     </div>

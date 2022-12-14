@@ -1,35 +1,45 @@
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {getSpecificPatient} from '../actions/patientActions'
 import PatientForm from "../components/patientForm";
 import React  from 'react';
+
 export default function PatientProfile(props){
     const dispatch=useDispatch();
+    const [edit,setEdit]=useState(false);
     const p=useSelector(state=>state.patient);
     const {patient,loading}=p;
     const id=window.location.pathname.split('/').slice(-1)[0];
-    var edit=true;
-
+    const imageStyle={
+        width:"200px",
+        height:"200px"
+    }
     useEffect(()=>{
             dispatch(getSpecificPatient(id));     
     },[dispatch,id]);
     return (
      loading===true || patient === undefined? <div>Loading</div>:
-     <div className="w-full overflow-hidden">
-        <div className="p-20">
-            <div className="w-full flex flex-row justify-between border-2">
-                <div className="w-2/12 h-2/12">
-                    <img src='../../profile.png' alt="profile"/>
-                </div>
+     <div>
+        <div className="p-2">
+            {
+                edit===true?
+                <button className="btn btn-primary" onClick={()=>{setEdit(!edit);}}>View</button>
+                :<button className="btn btn-primary" onClick={()=>{setEdit(!edit);}}>Edit</button>
+                
+            }
+            <div className="d-flex flex-row">
+                    <img src='../../profile.png' alt="profile" className="img-fluid" style={imageStyle}/>
                 {edit===false?
-                <div className="flex flex-col text-xl p-6 border-2 w-full">
-                    <p>Name: {patient.patientName}</p>
-                    <p>Email: {patient.patientEmail}</p>
-                    <p>DateofBirth: {patient.dateOfBirth}</p>
-                    <p>Gender: {patient.gender}</p>
-                    <p>Contact: {patient.contact}</p>
-                    <p>Bloodgroup: {patient.bloodgroup}</p>
-                    <p>Address: {patient.address}</p>
+                <div className="card container m-1">
+                    <div className="card-body">
+                        <p className="card-text">Name: {patient.patientName}</p>
+                        <p className="card-text">Email: {patient.patientEmail}</p>
+                        <p className="card-text">DateofBirth: {patient.dateOfBirth}</p>
+                        <p className="card-text">Gender: {patient.gender}</p>
+                        <p className="card-text">Contact: {patient.contact}</p>
+                        <p className="card-text">Bloodgroup: {patient.bloodgroup}</p>
+                        <p className="card-text">Address: {patient.address}</p>
+                    </div>
                 </div>: <PatientForm data={patient} edit={true}/>
                 }
             </div>
