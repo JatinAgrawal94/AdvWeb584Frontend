@@ -4,7 +4,8 @@ import {PATIENT_LIST_REQUEST,PATIENT_LIST_SUCCESS,PATIENT_LIST_FAIL,PATIENT_REQU
 export const getPatients=()=>async(dispatch,getState)=>{
     dispatch({type: PATIENT_LIST_REQUEST,payload:{}});
     try{
-        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Patient`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Patient`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: PATIENT_LIST_SUCCESS,payload:data});
         localStorage.setItem('patients',JSON.stringify(getState().patientList.patients));
     }catch(error){
@@ -15,7 +16,8 @@ export const getPatients=()=>async(dispatch,getState)=>{
 export const getSpecificPatient=(id)=>async(dispatch,getState)=>{
     dispatch({type: PATIENT_REQUEST,payload:{}});
     try{
-        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/id?id=${id}`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/id?id=${id}`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: PATIENT_SUCCESS,payload:data});
         localStorage.setItem('patient',JSON.stringify(getState().patient.patient));
     }catch(error){
@@ -26,7 +28,8 @@ export const getSpecificPatient=(id)=>async(dispatch,getState)=>{
 export const updatePatientProfile=(id,patient)=>async(dispatch,getState)=>{
     dispatch({type:PATIENT_PROFILE_UPDATE_REQUEST,payload:{}});
     try {
-        await Axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/${id}`,patient);
+        const token=await getState().userSignin.userInfo.token;
+        await Axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/${id}`,patient,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type:PATIENT_PROFILE_UPDATE_SUCCESS,payload:"Patient Data Updated."});
     } catch (error) {
         dispatch({type: PATIENT_PROFILE_UPDATE_FAILED,payload:"Data Update Failed!"});
@@ -36,7 +39,8 @@ export const updatePatientProfile=(id,patient)=>async(dispatch,getState)=>{
 export const createPatientProfile=(patient)=>async(dispatch,getState)=>{
     dispatch({type:PATIENT_CREATE_REQUEST,payload:{}})
     try { 
-        await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Patient`,patient);
+        const token=await getState().userSignin.userInfo.token;
+        await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Patient`,patient,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type:PATIENT_CREATE_SUCCESS,payload:"Patient Created"});
     } catch (error) {
         dispatch({type:PATIENT_CREATE_FAIL,payload:error.message});
@@ -46,7 +50,8 @@ export const createPatientProfile=(patient)=>async(dispatch,getState)=>{
 export const deletePatientProfile=(id)=>async(dispatch,getState)=>{
     dispatch({type:PATIENT_DELETE_REQUEST,payload:{}})
     try {
-        await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/id?id=${id}`);
+        const token=await getState().userSignin.userInfo.token;
+        await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Patient/id?id=${id}`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type:PATIENT_DELETE_SUCCESS,payload:"Patient Deleted"})
     } catch (error) {
         dispatch({type:PATIENT_DELETE_FAIL,payload:error.message})

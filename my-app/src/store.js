@@ -5,7 +5,7 @@ import { userSigninReducer } from './reducers/userReducers';
 import { appointmentCreateReducer, appointmentDeleteReducer, appointmentReadReducer, appointmentUpdateReducer } from './reducers/appointmentReducer';
 
 const initialState={
-    patientList:localStorage.getItem('patients') ? JSON.parse(localStorage.getItem('patients')):[],
+    patientList:{patients:localStorage.getItem('patients') ? JSON.parse(localStorage.getItem('patients')):[]},
     patient:localStorage.getItem('patient') ? JSON.parse(localStorage.getItem('patient')):{},
     doctorList:localStorage.getItem('doctors') ? JSON.parse(localStorage.getItem('doctors')):[],
     doctor:localStorage.getItem('doctor') ? JSON.parse(localStorage.getItem('doctor')):{},

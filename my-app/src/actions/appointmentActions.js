@@ -4,7 +4,8 @@ import Axios from 'axios';
 export const getAppointments=()=>async(dispatch,getState)=>{
     dispatch({type: APPOINTMENT_LIST_REQUEST,payload:{}});  
     try {
-        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: APPOINTMENT_LIST_SUCCESS,payload:data});  
         localStorage.setItem('appointments',JSON.stringify(getState().getAppointment.appointments));
     } catch (error) {
@@ -16,7 +17,8 @@ export const getAppointments=()=>async(dispatch,getState)=>{
 export const createAppointments=(d)=>async(dispatch,getState)=>{
     dispatch({type: APPOINTMENT_CREATE_REQUEST,payload:{}});
     try {
-        var {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment`,d);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment`,d,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: APPOINTMENT_CREATE_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:APPOINTMENT_CREATE_FAIL,payload:error.message});
@@ -27,7 +29,8 @@ export const createAppointments=(d)=>async(dispatch,getState)=>{
 export const deleteAppointments=(id)=>async(dispatch,getState)=>{
     dispatch({type: APPOINTMENT_DELETE_REQUEST,payload:{}});
     try {
-        var {data}=await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment/id?id=${id}`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment/id?id=${id}`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: APPOINTMENT_DELETE_SUCCESS,payload:data});
     } catch (error) {
         dispatch({type:APPOINTMENT_DELETE_FAIL,payload:error.message});
@@ -38,7 +41,8 @@ export const deleteAppointments=(id)=>async(dispatch,getState)=>{
 export const updateAppointments=()=>async(dispatch,getState)=>{
     dispatch({type: APPOINTMENT_UPDATE_REQUEST,payload:{}});
     try {
-        var {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Appointment`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: APPOINTMENT_UPDATE_SUCCESS,payload:data});
         // localStorage.setItem('patientappointments',JSON.stringify(getState().patientList.patients));
     } catch (error) {

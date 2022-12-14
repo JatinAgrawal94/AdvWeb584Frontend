@@ -4,7 +4,8 @@ import {DOCTOR_LIST_REQUEST,DOCTOR_LIST_SUCCESS,DOCTOR_LIST_FAIL,DOCTOR_REQUEST,
 export const getDoctors=()=>async(dispatch,getState)=>{
     dispatch({type: DOCTOR_LIST_REQUEST,payload:{}});
     try{
-        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: DOCTOR_LIST_SUCCESS,payload:data});
         localStorage.setItem('doctors',JSON.stringify(getState().doctorList.doctors));
     }catch(error){
@@ -15,7 +16,8 @@ export const getDoctors=()=>async(dispatch,getState)=>{
 export const getSpecificDoctor=(id)=>async(dispatch,getState)=>{
     dispatch({type: DOCTOR_REQUEST,payload:{}});
     try{
-        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor/id?id=${id}`);
+        const token=await getState().userSignin.userInfo.token;
+        var {data}=await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor/id?id=${id}`,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type: DOCTOR_SUCCESS,payload:data});
         localStorage.setItem('doctor',JSON.stringify(getState().doctor.doctor));
     }catch(error){
@@ -23,10 +25,11 @@ export const getSpecificDoctor=(id)=>async(dispatch,getState)=>{
     }
 }
 
-export const updateDoctorProfile=(id,patient)=>async(dispatch,getState)=>{
+export const updateDoctorProfile=(id,doctor)=>async(dispatch,getState)=>{
     dispatch({type:DOCTOR_PROFILE_UPDATE_REQUEST,payload:{}});
     try {
-        await Axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor/${id}`,patient);
+        const token=await getState().userSignin.userInfo.token;
+        await Axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor/${id}`,doctor,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type:DOCTOR_PROFILE_UPDATE_SUCCESS,payload:"Doctor Data Updated."});
     } catch (error) {
         dispatch({type: DOCTOR_PROFILE_UPDATE_FAILED,payload:"Data Update Failed!"});
@@ -36,7 +39,8 @@ export const updateDoctorProfile=(id,patient)=>async(dispatch,getState)=>{
 export const createDoctorProfile=(patient)=>async(dispatch,getState)=>{
     dispatch({type:DOCTOR_CREATE_REQUEST,payload:{}})
     try { 
-        await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor`,patient);
+        const token=await getState().userSignin.userInfo.token;
+        await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor`,patient,{headers:{'Authorization':`Bearer ${token}`}});
         dispatch({type:DOCTOR_CREATE_SUCCESS,payload:"Doctor Created"});
     } catch (error) {
         console.log(error);
@@ -47,7 +51,8 @@ export const createDoctorProfile=(patient)=>async(dispatch,getState)=>{
 export const deleteDoctorProfile=(id)=>async(dispatch,getState)=>{
     dispatch({type:DOCTOR_DELETE_REQUEST,payload:{}})
     try {
-        const {status}=await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor/id?id=${id}`);
+        const token=await getState().userSignin.userInfo.token;
+        const {status}=await Axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/Doctor/id?id=${id}`,{headers:{'Authorization':`Bearer ${token}`}});
         console.log(status);
         dispatch({type:DOCTOR_DELETE_SUCCESS,payload:"Doctor Deleted"})
     } catch (error) {
