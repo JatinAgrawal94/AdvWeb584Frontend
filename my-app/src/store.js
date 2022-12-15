@@ -10,7 +10,7 @@ const initialState={
     doctorList:localStorage.getItem('doctors') ? JSON.parse(localStorage.getItem('doctors')):[],
     doctor:localStorage.getItem('doctor') ? JSON.parse(localStorage.getItem('doctor')):{},
     userSignin:{
-        userInfo:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')):null
+        userInfo:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')):{}
     },
     getAppointment:localStorage.getItem('appointments')?JSON.parse(localStorage.getItem('appointments')):[]
 }

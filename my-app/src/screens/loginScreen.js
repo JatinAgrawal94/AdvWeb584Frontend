@@ -1,6 +1,8 @@
 import React, { useEffect, useState }  from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { signinAction } from '../actions/userActions';
+import { signinAction, signOutAction } from '../actions/userActions'
+import { verify } from 'jsonwebtoken';
+
 export default function LoginScreen(props){
     const dispatch=useDispatch();
     const [credentials,setCred]=useState({username:"",password:""});
@@ -8,21 +10,20 @@ export default function LoginScreen(props){
     const {userInfo}=signin;
     const loginfunction=()=>{
         dispatch(signinAction(credentials.username,credentials.password));
+        
     }
-
-    useEffect(() => {
-        if(userInfo!=null){
-            if(userInfo.roles==='Patient'){
-                window.location.pathname='/patient';
-            }else{
-                window.location.pathname='/doctor';
-            }
-        }
-    }, [userInfo])
     
+    useEffect(()=>{
+        if(userInfo!==undefined){
+            verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
+                if(err){
+                    dispatch(signOutAction());
+                }
+            });
+        }
+    },[userInfo])
 
     return(
-        // signin.userInfo!=null
         <div className='mb-3'>
             <h1 className='mt-3'>Login Page</h1>
             <div>

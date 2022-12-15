@@ -1,18 +1,20 @@
-import { useState ,useEffect} from "react";
+import { useState } from "react";
 import { createPatientProfile, updatePatientProfile } from "../actions/patientActions";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import React  from 'react';
-
+import { useNavigate } from "react-router";
 export default function PatientForm(props){
+    const {userInfo}=useSelector(state=>state.userSignin);
+    const navigate=useNavigate();
+    if(userInfo===undefined || Object.keys(userInfo).length===0){
+        navigate("/login");
+    }
     const {data,edit}=props;
     const dispatch=useDispatch();
     const [form,setForm]=useState(data);
     let input=document.getElementsByTagName('input');
-    useEffect(()=>{
-        if(edit!==false)
-       dispatch(updatePatientProfile(data.patientId,form)); 
-    },[dispatch,data.patientId,form,edit]);
-
+    // const [primary,setPrimary]=useState("alert alert-primary d-none");
+    // const [danger,setDanger]=useState("alert alert-danger d-none")
     const createPatient=(event)=>{
         event.preventDefault();
         let payload=form;
@@ -25,11 +27,35 @@ export default function PatientForm(props){
         }
         setForm(data);
     }
+    const updatePatient=(e)=>{
+        e.preventDefault();
+        dispatch(updatePatientProfile(data.patientId,form));
+    }
+
+    // const afunction=()=>{
+    //     setPrimary("alert alert-primary");
+    //     setTimeout(()=>setPrimary("alert alert-primary"),1000);
+    // }
+
+    // useEffect(()=>{
+    //     if(update.loading!==undefined && update.success!==undefined){
+    //         if(update.loading===false && update.success===true){
+    //             afunction();
+    //         }
+    //     }else if(update.loading!==undefined && update.error!==undefined){
+    //         if(update.loading===false){
+    //             setDanger("alert alert-danger")
+    //             setTimeout(()=>{
+    //                 setDanger("alert alert-danger d-none");
+    //             },1000)
+    //         }
+    //     }
+    // },[update])
 
     return ( 
     <div className="container m-1">
         <div className="p-20">
-            <form onSubmit={(e)=>{createPatient(e)}}>
+            <form onSubmit={(e)=>{edit===false?createPatient(e):updatePatient(e)}}>
                 <div className="form-group">
                     <label htmlFor="">Name</label>
                     <input className="form-control" type="text" value={form.patientName} onChange={(e)=>{setForm({...form,patientName:e.target.value})}} required/>
@@ -85,8 +111,16 @@ export default function PatientForm(props){
                     <button type="submit" value="Submit" className="btn btn-primary mx-1 my-1">Create Patient</button>
                     <button className="btn btn-secondary my-1" onClick={()=>{resetForm()}}>Reset</button>
                     </div>
-                    ): <p></p>}
-                
+                    ): <button type="submit" value="Submit" className="btn btn-primary mx-1 my-1">Update Patient Data</button>}
+                    
+                    {/* {
+                        update.loading!==undefined && update.success!==undefined?
+                        update.loading===false && update.success===true?
+                        <div className="alert alert-primary" role="alert">Data Updated</div>    
+
+                    } */}
+                    {/* <div className={primary} role="alert">Data Updated</div>                                              
+                    <div className={danger} role="alert">Data Updated Failed</div>         */}
                 </form>
        
         </div>

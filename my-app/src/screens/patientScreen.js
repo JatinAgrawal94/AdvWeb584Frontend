@@ -5,20 +5,24 @@ import {getPatients} from '../actions/patientActions'
 import PatientComponent from '../components/patientComponent';
 import { Link } from "react-router-dom";
 import React from 'react';
+// import { signOutAction } from "../actions/userActions";
 
 export default function PatientScreen(){
     const dispatch=useDispatch();
     const patient=useSelector(state=>state.patientList);
+    // if(patient.payload!==undefined && patient.loading===false && patient.payload.statusCode===401){
+    //     dispatch(signOutAction());
+    //     window.location.replace('/login')
+    // }
     const {patients,loading}=patient;
     useEffect(()=>{
         dispatch(getPatients());
     },[dispatch]);
-
     return (
         <div>
            <p className="fw-bold"> List of Patients</p>
             <Link to='/patient/create' className="btn btn-primary">Add Patient</Link>    
-            {loading===false?
+            {loading===false && patients!==undefined?
             <div className="list-group">
                 {patients.map((e)=>{
                     return <PatientComponent  key={e.patientId} data={e}/>

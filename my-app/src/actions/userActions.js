@@ -5,7 +5,6 @@ export const signinAction=(username,password)=>async(dispatch)=>{
     dispatch({type:USER_SIGNIN_REQUEST,payload:{username,password}});
     try{
         const {data}=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Account/login`,{userName:username,password:password});
-        console.log(data.token);
         dispatch({type:USER_SIGNIN_SUCCESS,payload:{token:data.token}});
         // check what key-value pairs are returned by the server
         localStorage.setItem('userInfo',JSON.stringify({token:data.token}));
@@ -21,8 +20,11 @@ export const signinAction=(username,password)=>async(dispatch)=>{
 }
 
 export const signOutAction=()=>async(dispatch)=>{
-    localStorage.removeItem('patients');
-    localStorage.removeItem('doctors');
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('patients');
+    localStorage.removeItem('patient');
+    localStorage.removeItem('doctors');
+    localStorage.removeItem('doctor');
+    localStorage.removeItem('appointments');
     dispatch({type:USER_SIGNOUT});
 }

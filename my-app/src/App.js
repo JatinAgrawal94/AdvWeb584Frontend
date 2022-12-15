@@ -14,6 +14,7 @@ import LoginScreen from './screens/loginScreen';
 import './index.css';
 import AppointmentProfile from './screens/appointmentProfile.js';
 import AppointmentForm from './components/appointmentForm.jsx';
+import AuthorizationComponent from './components/authorizationComponent.jsx';
 
 function App() {
   dotenv.config();
@@ -24,16 +25,16 @@ function App() {
     <div className="width-full">
         <Nav/>
         <Routes>
-          <Route exact path='/' element={<Home/>}/>
-          <Route exact path='/appointment' element={<AppointmentScreen/>}/>
-          <Route exact path='/appointment/:id' element={<AppointmentProfile/>}/>
-          <Route exact path='/appointment/create' element={<AppointmentForm/>}/>
-          <Route exact path='/patient' element={<PatientScreen/>}/>
-          <Route exact path='/patient/:id' element={<PatientProfile/>}/>
-          <Route exact path='/patient/create' element={<PatientForm data={{patientId:"",patientName:"",patientEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",address:""}} edit={false}/>}/>
-          <Route exact path='/doctor' element={<DoctorScreen/>}/>
-          <Route exact path='/doctor/:id' element={<DoctorProfile/>}/>
-          <Route exact path='/doctor/create' element={<DoctorForm data={{doctorId:"",doctorName:"",doctorEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",designation:"",timings:"-",address:""}} edit={false}/>}/>
+          <Route exact path='/' element={<AuthorizationComponent><Home/></AuthorizationComponent>}/>
+          <Route exact path='/appointment' element={<AuthorizationComponent><AppointmentScreen/></AuthorizationComponent>}/>
+          <Route exact path='/appointment/:id' element={<AuthorizationComponent><AppointmentProfile/></AuthorizationComponent>}/>
+          <Route exact path='/appointment/create' element={<AuthorizationComponent><AppointmentForm/></AuthorizationComponent>}/>
+          <Route exact path='/patient' element={<AuthorizationComponent><PatientScreen/></AuthorizationComponent>}/>
+          <Route exact path='/patient/:id' element={<AuthorizationComponent><PatientProfile/></AuthorizationComponent>}/>
+          <Route exact path='/patient/create' element={<AuthorizationComponent><PatientForm data={{patientId:"",patientName:"",patientEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",address:""}} edit={false}/></AuthorizationComponent>}/>
+          <Route exact path='/doctor' element={<AuthorizationComponent><DoctorScreen/></AuthorizationComponent>}/>
+          <Route exact path='/doctor/:id' element={<AuthorizationComponent><DoctorProfile/></AuthorizationComponent>}/>
+          <Route exact path='/doctor/create' element={<AuthorizationComponent><DoctorForm data={{doctorId:"",doctorName:"",doctorEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",designation:"",timings:"-",address:""}} edit={false}/></AuthorizationComponent>}/>
           <Route exact path='/login' element={<LoginScreen/>}/>
         </Routes>
     </div>
