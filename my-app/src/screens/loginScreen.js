@@ -4,25 +4,29 @@ import { signinAction, signOutAction } from '../actions/userActions'
 import { verify } from 'jsonwebtoken';
 
 export default function LoginScreen(props){
-    console.log("Singin");
     const dispatch=useDispatch();
     const [credentials,setCred]=useState({username:"",password:""});
     const signin=useSelector(state=>state.userSignin);
     const {userInfo}=signin;
+    // console.log(signin);
     const loginfunction=()=>{
         dispatch(signinAction(credentials.username,credentials.password));
-        
     }
     
-    // useEffect(()=>{
-    //     if(userInfo!==undefined){
-    //         verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
-    //             if(err){
-    //                 dispatch(signOutAction());
-    //             }
-    //         });
-    //     }
-    // },[userInfo])
+    useEffect(()=>{
+        if(userInfo!==undefined){
+            verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
+                if(err){
+                    dispatch(signOutAction());
+                }
+            });
+        }
+        // else if(userInfo.loading!==undefined && userInfo.loading===false){
+        //     if(userInfo.userInfo!==undefined){
+        //         window.location.href="/"
+        //     }
+        // }
+    },[userInfo])
 
     return(
         <div className='mb-3'>
