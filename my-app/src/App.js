@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router,Routes, Route} from 'react-router-dom';
-import Nav from "./components/nav.js";
+import Nav from "./components/nav.jsx";
 import {Home} from './components/home';
 import AppointmentScreen from './screens/appointmentScreen';
 import PatientScreen from './screens/patientScreen'
