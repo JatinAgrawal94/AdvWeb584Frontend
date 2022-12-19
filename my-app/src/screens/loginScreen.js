@@ -4,6 +4,7 @@ import { signinAction, signOutAction } from '../actions/userActions'
 import { verify } from 'jsonwebtoken';
 
 export default function LoginScreen(props){
+    console.log("Singin");
     const dispatch=useDispatch();
     const [credentials,setCred]=useState({username:"",password:""});
     const signin=useSelector(state=>state.userSignin);
