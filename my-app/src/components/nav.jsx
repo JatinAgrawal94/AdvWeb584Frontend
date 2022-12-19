@@ -16,6 +16,7 @@ export default function Nav(){
             {userInfo===null || userInfo===undefined || Object.keys(userInfo).length===0?<div className="container-fluid">
             <p className="navbar-brand">AppointmentScheduler</p>
             <Link to='/login' className="nav-link active">Login</Link>
+            <Link to='/register' className="nav-link active">Register</Link>
             </div>
             :<div className="container-fluid">
                 <p className="navbar-brand">AppointmentScheduler</p>

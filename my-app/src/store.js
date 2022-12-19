@@ -1,7 +1,7 @@
 import { patientCreateReducer, patientDataUpdateReducer, patientDeleteReducer, patientListReducer,patientReducer} from './reducers/patientReducer';
 import {configureStore} from '@reduxjs/toolkit/';
 import { doctorCreateReducer, doctorListReducer, doctorReducer,doctorDeleteReducer } from './reducers/doctorReducers';
-import { userSigninReducer } from './reducers/userReducers';
+import { userCreateReducer, userSigninReducer } from './reducers/userReducers';
 import { appointmentCreateReducer, appointmentDeleteReducer, appointmentReadReducer, appointmentUpdateReducer } from './reducers/appointmentReducer';
 
 const initialState={
@@ -30,7 +30,8 @@ export default configureStore({
         addAppointment:appointmentCreateReducer,
         deleteAppointment:appointmentDeleteReducer,
         getAppointment:appointmentReadReducer,
-        updateAppointment:appointmentUpdateReducer
+        updateAppointment:appointmentUpdateReducer,
+        createUser:userCreateReducer
     },
     preloadedState:initialState
 });

@@ -34,6 +34,7 @@ export default function LoginScreen(props){
                 <label className="form-label">Password</label>
                 <input type="password" className="form-control" onChange={(e)=>{setCred({...credentials,password:e.target.value})}}/>
             </div>
+            <p className='text-danger'>*Password should contain Uppercase,Lowercase letters and digits and No Special Case Characters</p>
             <button className='btn btn-primary mt-3' onClick={()=>loginfunction()}>Login</button>
         </div>
     );

@@ -15,6 +15,7 @@ import './index.css';
 import AppointmentProfile from './screens/appointmentProfile.js';
 import AppointmentForm from './components/appointmentForm.jsx';
 import AuthorizationComponent from './components/authorizationComponent.jsx';
+import RegisterScreen from './screens/RegisterScreen.js';
 
 function App() {
   dotenv.config();
@@ -35,6 +36,7 @@ function App() {
           <Route exact path='/doctor/:id' element={<AuthorizationComponent><DoctorProfile/></AuthorizationComponent>}/>
           <Route exact path='/doctor/create' element={<AuthorizationComponent><DoctorForm data={{doctorId:"",doctorName:"",doctorEmail:"",dateOfBirth:"",gender:"",contact:"",bloodgroup:"",designation:"",timings:"-",address:""}} edit={false}/></AuthorizationComponent>}/>
           <Route exact path='/login' element={<LoginScreen/>}/>
+          <Route exact path='/register' element={<RegisterScreen/>}/>
         </Routes>
     </div>
 </Router>
