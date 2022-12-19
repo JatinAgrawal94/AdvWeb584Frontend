@@ -21,11 +21,6 @@ export default function LoginScreen(props){
                 }
             });
         }
-        // else if(userInfo.loading!==undefined && userInfo.loading===false){
-        //     if(userInfo.userInfo!==undefined){
-        //         window.location.href="/"
-        //     }
-        // }
     },[userInfo])
 
     return(
