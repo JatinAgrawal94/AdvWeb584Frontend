@@ -22,10 +22,11 @@ export default function AppointmentForm(props){
     const errorSectionCSS={
         color:"red"
     }
-    const addAppointment=()=>{        
+    const addAppointment=(e)=>{       
+        e.preventDefault(); 
         const result1=patient.patients.filter((e)=>e.patientName===form.patientName);
         const result2=doctor.doctors.filter((e)=>e.doctorName===form.doctorName);
-        if(form.appointmentType!=="Follow Up" || form.appointmentType!=="New"){
+        if(form.appointmentType!=="Follow Up" && form.appointmentType!=="New"){
             document.getElementsByClassName('error-section')[0].innerHTML="AppointmentType is invalid";
         }
         else if(result1.length!==0 && result2.length!==0){
@@ -57,7 +58,7 @@ export default function AppointmentForm(props){
     return (
         doctor.loading===false && patient.loading===false?
         <div>
-            <form>
+            <form onSubmit={(e)=>addAppointment(e)}>
             <div>
                 <label className='form-label' htmlFor="exampleDataList validationServer01">PatientName</label>
                 <input className='form-control has-validation' type="select" list="datalistOptions" id="exampleDataList" onChange={(e)=>setForm({...form,patientName:e.target.value})}  required/>
@@ -90,7 +91,7 @@ export default function AppointmentForm(props){
             </div>
             <div>
                 <label className='form-label' htmlFor="exampleDataList2" >AppointmentType</label>
-                <input className='form-control' type="text" list="datalistOptions2" id="exampleDataList2" onChange={(e)=>setForm({...form,appointmentType:e.target.value})} placeholder="first time or follow up?" required/>
+                <input className='form-control' type="text" list="datalistOptions2" id="exampleDataList2" onChange={(e)=>setForm({...form,appointmentType:e.target.value})} placeholder="New or Follow Up?" required/>
                 <datalist id="datalistOptions2">
                 <option value="Follow Up"/>
                 <option value="New"/>
@@ -100,7 +101,7 @@ export default function AppointmentForm(props){
                 <label className='form-label' >Reason</label>
                 <input className='form-control' type="text"  onChange={(e)=>setForm({...form,reason:e.target.value})}required/>
             </div>
-            <button type ="submit" className="btn btn-primary" onClick={()=>addAppointment()}>Create Appointment</button>
+            <button type ="submit" className="btn btn-primary">Create Appointment</button>
             <p className="error-section" style={errorSectionCSS}></p>
             </form>
         </div>:
