@@ -7,21 +7,21 @@ export default function LoginScreen(props){
     const dispatch=useDispatch();
     const [credentials,setCred]=useState({username:"",password:""});
     const signin=useSelector(state=>state.userSignin);
-    // const {userInfo}=signin;
+    const {userInfo}=signin;
     // console.log(signin);
     const loginfunction=()=>{
         dispatch(signinAction(credentials.username,credentials.password));
     }
     
-    // useEffect(()=>{
-    //     if(userInfo!==undefined){
-    //         verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
-    //             if(err){
-    //                 dispatch(signOutAction());
-    //             }
-    //         });
-    //     }
-    // },[userInfo])
+    useEffect(()=>{
+        if(userInfo!==undefined){
+            verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
+                if(err){
+                    dispatch(signOutAction());
+                }
+            });
+        }
+    },[userInfo])
 
     return(
         <div className='mb-3'>
