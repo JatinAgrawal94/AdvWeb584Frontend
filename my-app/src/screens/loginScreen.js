@@ -13,15 +13,15 @@ export default function LoginScreen(props){
         dispatch(signinAction(credentials.username,credentials.password));
     }
     
-    useEffect(()=>{
-        if(userInfo!==undefined){
-            verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
-                if(err){
-                    dispatch(signOutAction());
-                }
-            });
-        }
-    },[userInfo])
+    // useEffect(()=>{
+    //     if(userInfo!==undefined){
+    //         verify(userInfo.token,"this is my custom Secret key for authentication",function(err,decode){
+    //             if(err){
+    //                 dispatch(signOutAction());
+    //             }
+    //         });
+    //     }
+    // },[userInfo])
 
     return(
         <div className='mb-3'>
