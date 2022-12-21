@@ -7,7 +7,7 @@ export default function LoginScreen(props){
     const dispatch=useDispatch();
     const [credentials,setCred]=useState({username:"",password:""});
     const signin=useSelector(state=>state.userSignin);
-    const {userInfo}=signin;
+    // const {userInfo}=signin;
     // console.log(signin);
     const loginfunction=()=>{
         dispatch(signinAction(credentials.username,credentials.password));
