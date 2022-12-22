@@ -61,18 +61,18 @@ export default function AppointmentForm(props){
             <form onSubmit={(e)=>addAppointment(e)}>
             <div>
                 <label className='form-label' htmlFor="exampleDataList validationServer01">PatientName</label>
-                <input className='form-control has-validation' type="select" list="datalistOptions" id="exampleDataList" onChange={(e)=>setForm({...form,patientName:e.target.value})}  required/>
+                <input className='form-control has-validation' type="select" list="datalistOptions" id="exampleDataList" onChange={(e)=>setForm({...form,patientName:e.target.value})} placeholder="Start typing and select from the list" required/>
                 <datalist id="datalistOptions">
                     {
                         patient.patients.map((e)=>{
-                            return  <option value={e.patientName} key={e.patientId} id={e.patientId} className="patientclass" onClick={(e)=>{console.log(e.target);}}/>
+                            return  <option value={e.patientName} key={e.patientId} id={e.patientId} className="patientclass"/>
                         })
                     }
                 </datalist>
             </div>
             <div>
                 <label className='form-label' htmlFor="exampleDataList1" >DoctorName</label>
-                <input className='form-control' type="text"  list="datalistOptions1" id="exampleDataList1" onChange={(e)=>setForm({...form,doctorName:e.target.value})} required/>
+                <input className='form-control' type="text"  list="datalistOptions1" id="exampleDataList1" onChange={(e)=>setForm({...form,doctorName:e.target.value})} placeholder="Start typing and select from the list" required/>
                 <datalist id="datalistOptions1">
                 {
                     doctor.doctors.map((e)=>{
@@ -99,7 +99,7 @@ export default function AppointmentForm(props){
             </div>
             <div>
                 <label className='form-label' >Reason</label>
-                <input className='form-control' type="text"  onChange={(e)=>setForm({...form,reason:e.target.value})}required/>
+                <input className='form-control' type="text"  onChange={(e)=>setForm({...form,reason:e.target.value})} placeholder="Reason for Appointment" required/>
             </div>
             <button type ="submit" className="btn btn-primary">Create Appointment</button>
             <p className="error-section" style={errorSectionCSS}></p>
