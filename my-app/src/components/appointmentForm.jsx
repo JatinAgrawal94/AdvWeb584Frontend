@@ -23,7 +23,7 @@ export default function AppointmentForm(props){
         color:"red"
     }
     const addAppointment=(e)=>{       
-        e.preventDefault(); 
+        e.preventDefault();  
         const result1=patient.patients.filter((e)=>e.patientName===form.patientName);
         const result2=doctor.doctors.filter((e)=>e.doctorName===form.doctorName);
         if(form.appointmentType!=="Follow Up" && form.appointmentType!=="New"){

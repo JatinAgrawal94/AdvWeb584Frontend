@@ -33,7 +33,7 @@ export const signOutAction=()=>async(dispatch)=>{
 export const registerAction=(username,password,confirmPassword)=>async(dispatch)=>{
     dispatch({type:USER_CREATE_REQUEST,payload:{username,password,confirmPassword}});
     try{
-        const data=await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Account/create`,{userName:username,password:password,confirmPassword:confirmPassword});
+        await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/Account/create`,{userName:username,password:password,confirmPassword:confirmPassword});
         dispatch({type:USER_CREATE_SUCCESS,payload:"User Created"});
         // localStorage.setItem('userInfo',JSON.stringify({token:data.token}));
     }catch(error){
